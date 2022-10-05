@@ -6,10 +6,18 @@ on:
 
 jobs:
   build:
-    if: ${{ contains(github.event.label.name, 'integration') }}
+    if: ${{ contains(github.event.label.name, 'integration:env5') }}
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Run a one-line script
       run: echo Hello, world!
+
+    - name: Trigger Azure Devops Pipeline
+      uses: Azure/pipelines@v1.2
+      with:
+        azure-devops-project-url: 'https://dev.azure.com/ssaifee1992/azure-devops-kubernetes'
+        azure-pipeline-name: 'integration-env5' # name of the Azure pipeline to be triggered
+        azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
+        # azure-pipeline-variables:  '{"tag": "${{ steps.build.outputs.IMAGE_TAG }}"}' # optional stringified json
