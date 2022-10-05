@@ -33,6 +33,6 @@ jobs:
       uses: Azure/pipelines@v1.2
       with:
         azure-devops-project-url: 'https://dev.azure.com/ssaifee1992/azure-devops-kubernetes'
-        azure-pipeline-name: 'control' # name of the Azure pipeline to be triggered
+        azure-pipeline-name: 'myrelease' # name of the Azure pipeline to be triggered
         azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
         azure-pipeline-variables:  '{"tag": "${{ steps.build.outputs.IMAGE_TAG }}"}' # optional stringified json
